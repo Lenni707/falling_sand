@@ -1,6 +1,6 @@
 
 
-use crate::{cell::{CELL_SIZE, Cell}, physics::{update_sand, update_water}};
+use crate::{cell::{CELL_SIZE, Cell}, physics::{update_fire, update_sand, update_water}};
 use macroquad::prelude::*;
 
 pub const GRID_WIDTH: usize = 200;
@@ -67,6 +67,7 @@ impl World {
                 match cell {
                     Cell::Sand => update_sand(self, x, y),
                     Cell::Water => update_water(self, x, y),
+                    Cell::Fire => update_fire(self, x, y),
                     Cell::Stone | Cell::Empty | _ => {}
                 }
             }
@@ -93,6 +94,9 @@ impl World {
         }
         if is_key_pressed(KeyCode::Key3) {
             return Cell::Water;
+        }
+        if is_key_pressed(KeyCode::Key4) {
+            return Cell::Fire;
         }
         current
     }

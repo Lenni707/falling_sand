@@ -1,4 +1,4 @@
-use crate::world::{GRID_HEIGHT, GRID_WIDTH, World};
+use crate::world::{self, GRID_HEIGHT, GRID_WIDTH, World};
 use crate::cell::Cell;
 use macroquad::prelude::*;
 
@@ -77,5 +77,8 @@ pub fn update_water(world: &mut World, x: usize, y: usize) {
 }
 
 pub fn update_fire(world: &mut World, x: usize, y: usize) {
-    
+    if y + 1 < GRID_HEIGHT && world.is_empty(x, y + 1) {
+        world.set(x, y, Cell::Empty);
+        world.set(x, y +  1, Cell::Fire);
+    }
 }
